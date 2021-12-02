@@ -10,7 +10,7 @@ found = False
 for i, n in enumerate(numbers):
     if found:
         break
-    for m in numbers[i + 1:]:
+    for m in numbers[i + 1 :]:
         if n + m == 2020:
             print(n * m)
             found = True

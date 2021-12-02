@@ -7,8 +7,8 @@ def is_valid(line):
     n_max = int(line.split("-")[1].split(" ")[0])
     letter = line.split(" ")[1].split(":")[0]
     text = line.split(" ")[2]
-    l1 = text[n_min-1]
-    l2 = text[n_max-1]
+    l1 = text[n_min - 1]
+    l2 = text[n_max - 1]
     return xor(l1 == letter, l2 == letter)
 
 

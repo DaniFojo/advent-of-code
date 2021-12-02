@@ -16,5 +16,4 @@ with input_file.open("r") as f:
             else:
                 aim -= number
 
-
 print(depth * forward)
