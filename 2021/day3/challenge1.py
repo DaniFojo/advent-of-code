@@ -13,4 +13,4 @@ for line in input_lines:
 most_common = [s > (len(input_lines) // 2) for s in sums]
 epsilon = int("".join(["1" if c else "0" for c in most_common]), 2)
 gamma = int("".join(["0" if c else "1" for c in most_common]), 2)
-print(epsilon*gamma)
+print(epsilon * gamma)

@@ -1,24 +1,26 @@
-from pathlib import Path
 from collections import defaultdict
+from pathlib import Path
 
 input_file = Path(__file__).parent / "in.txt"
 
 with input_file.open("r") as f:
-    lines = f.readlines()   
+    lines = f.readlines()
 
 input_digits = [line.split("|")[0].split(" ")[:-1] for line in lines]
 output_digits = [line.strip("\n").split("|")[1].split(" ")[1:] for line in lines]
 
 used_segments = {
-    "a": [0, 2, 3, 5, 6, 7, 8, 9], 
-    "b": [0, 4, 5, 6, 8, 9], 
-    "c": [0, 1, 2, 3, 4, 7, 8, 9], 
+    "a": [0, 2, 3, 5, 6, 7, 8, 9],
+    "b": [0, 4, 5, 6, 8, 9],
+    "c": [0, 1, 2, 3, 4, 7, 8, 9],
     "d": [2, 3, 4, 5, 6, 8, 9],
     "e": [0, 2, 6, 8],
     "f": [0, 1, 3, 4, 5, 6, 7, 8, 9],
     "g": [0, 2, 3, 5, 6, 8, 9],
 }
-reverse_used_segments = {i: set(x for x in used_segments if i in used_segments[x]) for i in range(10)}
+reverse_used_segments = {
+    i: set(x for x in used_segments if i in used_segments[x]) for i in range(10)
+}
 
 possible_digits_by_len = {2: [1], 3: [7], 4: [4], 5: [2, 3, 5], 6: [0, 6, 9], 7: [8]}
 res_sum = 0
@@ -59,7 +61,7 @@ for digits, output in zip(input_digits, output_digits):
                 final_mapping["d"] = k
             else:
                 final_mapping["g"] = k
-    
+
     reverse_final_mapping = {v: k for k, v in final_mapping.items()}
     res = []
     for o in output:

@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import numpy as np
 
 input_file = Path(__file__).parent / "in.txt"

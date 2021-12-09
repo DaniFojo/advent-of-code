@@ -1,5 +1,5 @@
-from pathlib import Path
 import itertools
+from pathlib import Path
 
 input_file = Path(__file__).parent / "in.txt"
 
