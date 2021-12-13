@@ -17,5 +17,16 @@ with input_file.open("r") as f:
                 folds.append(("y", int(line.split("=")[1])))
 
 coords = np.asarray(coords)
-if folds[0][0] == "x":
-    coords[coords[:, 0] > folds[0][1], 0] = 2 * folds[0][1] - coords[coords[:, 0] > folds[0][1], 0]
+for fold in folds:
+    ax = 0 if fold[0] == "x" else 1
+    coords[coords[:, ax] > fold[1], ax] = (
+        2 * fold[1] - coords[coords[:, ax] > fold[1], ax]
+    )
+letters = np.full((coords[:, 0].max() + 1, coords[:, 1].max() + 1), ".")
+for p in coords:
+    letters[p[0], p[1]] = "#"
+
+for row in letters.T:
+    for letter in row:
+        print(letter, end="")
+    print("")
