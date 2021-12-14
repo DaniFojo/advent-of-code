@@ -1,0 +1,28 @@
+from collections import Counter
+from pathlib import Path
+import re
+
+input_file = Path(__file__).parent / "in.txt"
+
+with input_file.open("r") as f:
+    lines = list(f.readlines())
+    string = lines[0].strip("\n")
+    exp = r"[A-Z]{1,2}"
+    conversion = {
+        re.findall(exp, line)[0]: re.findall(exp, line)[1] for line in lines[2:]
+    }
+
+steps = 10
+for _ in range(steps):
+    new_string = ""
+    for i in range(len(string)-1):
+        pair = (string[i] + string[i+1])
+        if pair in conversion:
+            new_string += string[i] + conversion[pair]
+        else:
+            new_string += string[i]
+    new_string += string[-1]
+    string = new_string
+
+counter = Counter(string)
+print(counter.most_common()[0][1] - counter.most_common()[-1][1])
