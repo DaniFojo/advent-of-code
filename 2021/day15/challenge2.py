@@ -17,7 +17,6 @@ matrix = np.concatenate([matrix + i for i in range(0, 5)], axis=1)
 matrix[matrix > 9] = matrix[matrix > 9] - 9
 
 costs = np.full_like(matrix, np.inf, dtype=float)
-visited = np.zeros_like(matrix, dtype=float)
 
 start = (0, 0)
 end = (matrix.shape[0] - 1, matrix.shape[1] - 1)
