@@ -7,8 +7,7 @@ input_file = Path(__file__).parent / "in.txt"
 with input_file.open("r") as f:
     string = f.readline().strip("\n")
 
-x1, x2, y1, y2 = (int(i) for i in re.findall(r"\d{1,3}", string))
-y1, y2 = -y1, -y2
+x1, x2, y1, y2 = (int(i) for i in re.findall(r"-?\d{1,3}", string))
 
 
 def simulate(vx, vy):
