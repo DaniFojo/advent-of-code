@@ -5,7 +5,6 @@ import numpy as np
 from collections import Counter
 
 input_file = Path(__file__).parent / "in.txt"
-# input_file = Path(__file__).parent / "testcase.txt"
 
 with input_file.open("r") as f:
     exp = r"(?:-?\d{1,3},-?\d{1,3},-?\d{1,3}\n?)+"
