@@ -19,6 +19,7 @@ class Die:
         self.counter %= 100
         return self.counter + 1
 
+
 die = Die()
 points_1 = 0
 points_2 = 0
@@ -28,14 +29,14 @@ pos_2 -= 1
 while True:
     pos_1 += die.roll() + die.roll() + die.roll()
     pos_1 %= 10
-    points_1 += (pos_1 + 1)
+    points_1 += pos_1 + 1
     if points_1 >= 1000:
         print(die.n * points_2)
         break
 
     pos_2 += die.roll() + die.roll() + die.roll()
     pos_2 %= 10
-    points_2 += (pos_2 + 1)
+    points_2 += pos_2 + 1
     if points_2 >= 1000:
         print(die.n * points_1)
         break
