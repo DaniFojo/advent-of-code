@@ -1,8 +1,9 @@
-from pathlib import Path
 import re
-from dataclasses import dataclass
-from tqdm.contrib import tzip
 from collections import Counter
+from dataclasses import dataclass
+from pathlib import Path
+
+from tqdm.contrib import tzip
 
 input_file = Path(__file__).parent / "in.txt"
 # input_file = Path(__file__).parent / "testcase.txt"
@@ -13,6 +14,7 @@ with input_file.open("r") as f:
     for line in f.readlines():
         coordinates.append([int(x) for x in re.findall(r"-?\d+", line)])
         is_on.append(line.startswith("on"))
+
 
 @dataclass(frozen=True)
 class Cuboid:
@@ -25,7 +27,9 @@ class Cuboid:
 
     @property
     def size(self):
-        return (self.x2-self.x1 + 1) * (self.y2-self.y1 + 1) * (self.z2-self.z1 + 1)
+        return (
+            (self.x2 - self.x1 + 1) * (self.y2 - self.y1 + 1) * (self.z2 - self.z1 + 1)
+        )
 
 
 def intersect(cuboid_1, cuboid_2):
@@ -60,8 +64,7 @@ class SparseTensor:
         for c, v in self.cuboids.items():
             ret += c.size * v
         return ret
-    
-                
+
 
 tensor = SparseTensor()
 for on, coords in tzip(is_on, coordinates):
