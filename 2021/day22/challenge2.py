@@ -3,10 +3,7 @@ from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
-from tqdm.contrib import tzip
-
 input_file = Path(__file__).parent / "in.txt"
-# input_file = Path(__file__).parent / "testcase.txt"
 
 coordinates = []
 is_on = []
@@ -49,14 +46,14 @@ class SparseTensor:
     def __init__(self):
         self.cuboids = Counter()
 
-    def set(self, new_cuboid, value):
+    def set(self, new_cuboid, new_value):
         new_cubes = Counter()
         for cuboid, value in self.cuboids.items():
             intersection = intersect(cuboid, new_cuboid)
             if intersection:
                 new_cubes[intersection] -= value
-        if value == 1:
-            new_cubes[new_cuboid] += value
+        if new_value == 1:
+            new_cubes[new_cuboid] += new_value
         self.cuboids.update(new_cubes)
 
     def total(self):
@@ -67,8 +64,7 @@ class SparseTensor:
 
 
 tensor = SparseTensor()
-for on, coords in tzip(is_on, coordinates):
-    x1, x2, y1, y2, z1, z2 = coords
-    cuboid = Cuboid(x1, x2, y1, y2, z1, z2)
+for on, coords in zip(is_on, coordinates):
+    cuboid = Cuboid(*coords)
     tensor.set(cuboid, 1 if on else -1)
 print(tensor.total())
